@@ -1,0 +1,77 @@
+create Database School
+
+use School
+create table Students (
+Name varchar(200) unique , 
+Age int ,
+City varchar (230),
+RollNo int identity (200,1)
+)
+
+insert into Students values ('Karthi',21,'Sivakasi')
+insert into Students values ('Maha',30,'Sivakasi')
+insert into Students values ('elango',35,'Sivakasi')
+insert into Students values ('thala',35,'Sivakasi')
+insert into Students values ('don',67,'Sivakasi')
+insert into Students values ('vino',22,'Sivakasi')
+insert into Students values ('gohi',34,'Sivakasi')
+insert into Students values ('vani',40,'Sivakasi')
+insert into Student (Name,	Age) values ('sam',23)
+
+select * from Students
+--select Name , Age from Student
+select * from Student where City = 'Sivakasi' or  Age <= 21
+
+delete from Student where age > 50
+
+alter Table Student add RollNo int
+select distinct * from Student 
+
+update Student set  RollNo = 1 
+
+update Student set Age = 20 where Name = 'gohi'
+
+select distinct *  from Student
+select Name AS [NAME OF THE STUDENT] from Student
+
+select TOP 3 * FROM Student 
+select avg(AGE) from Student
+select count(*) from Student where Name='vani'
+select distinct * from Student order by  Age ASc
+
+
+create procedure test @func varchar(233)
+as
+select * from Student where Name=@func
+go
+
+exec test @func ="Karthi";
+
+
+create table Studentss (
+Name varchar(200) unique , 
+Age int ,
+City varchar (230),
+RollNo int identity (200,1) primary key
+)
+
+
+create table fees(
+feesType  varchar(40),
+fees int ,
+StudId int 
+)
+
+select * from Students
+select * from fees
+insert into fees values('Annual',29000,202)
+insert into fees values(23000,201)
+insert into fees values(27000,202)
+
+select  Fees from fees where RollNo = 200
+drop table fees
+
+
+select * from Students
+select * from fees
+select Students.Name, Students.City , Students.RollNo ,fees.feesType, fees.fees  from Students full outer join  fees on Students.RollNo = fees.StudId 
